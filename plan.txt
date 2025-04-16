@@ -1,0 +1,29 @@
+Objective
+
+The game wil be played against the computer 
+a functions will randomly return 'rock', 'paper', or 'scissors'
+
+
+Questions to consider
+
+Does your program have a user interface? 
+The interface will allow users to push a button to indicate when they're ready to play.
+
+What will it look like? 
+The button will have black text on a red background. The text will read, 'PLAY'.
+
+What inputs will your program have? 
+A button click.
+
+What’s the desired output?
+A functions will randomly return 'rock', 'paper', or 'scissors'.
+
+Given your inputs, what are the steps necessary to return the desired output?
+
+
+Pseudocode
+
+When a user clicks on a button
+Initialise a function that randomly returns 'rock', 'paper', or 'scissors' for the user
+Initialise another function that randomly returns 'rock', 'paper', or 'scissors' for the computer
+Print both values 
