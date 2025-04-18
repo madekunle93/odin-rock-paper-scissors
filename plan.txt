@@ -7,23 +7,30 @@ a functions will randomly return 'rock', 'paper', or 'scissors'
 Questions to consider
 
 Does your program have a user interface? 
-The interface will allow users to push a button to indicate when they're ready to play.
+The interface will allow users to input their choice or rack, paper, scissors.
 
 What will it look like? 
-The button will have black text on a red background. The text will read, 'PLAY'.
+It will be played in the console and the user will input via the 'prompt' dialouge box
 
 What inputs will your program have? 
-A button click.
+As above
 
 What’s the desired output?
-A functions will randomly return 'rock', 'paper', or 'scissors'.
+A function will randomly return either 'rock', 'paper', or 'scissors'. The program will highlight who wins each round, or if it's a tie.
 
 Given your inputs, what are the steps necessary to return the desired output?
+1. create function for user input
+2. display user input
+3. create function for computer opponent to generate either rock, paper, or scissors
+4. ensure computer opponent's choice is random
+5. display computer choice 
+6. create rules to determine how wins are decided
+7. display to user whether they won, lost, or drew 
 
 
 Pseudocode
 
-When a user clicks on a button
-Initialise a function that randomly returns 'rock', 'paper', or 'scissors' for the user
-Initialise another function that randomly returns 'rock', 'paper', or 'scissors' for the computer
+When a user inputs either rock, paper, or scissors
+Initialise a function that randomly returns 'rock', 'paper', or 'scissors' from the computer opponent
 Print both values 
+Declare result of value pair

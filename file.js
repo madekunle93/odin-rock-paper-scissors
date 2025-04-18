@@ -1,55 +1,83 @@
 // Declare a new function
 // Highlight the three parameters—placeholders for the words we’ll pass in
 
-function getComputerChoice(a, b, c) {
+// Get computer to return 'rock' 'paper' or 'scissors'
 
-// Math.random() returns a floating‑point number in the range [0, 1) (including 0, excluding 1).
-// Multiplying by 3 scales that to [0, 3).
-// Math.floor(...) then rounds down to the nearest integer, giving one of 0, 1, or 2.
-// Store it in the constant i, which is used to decide which word to return.
-
-    const i = Math.floor(Math.random() * 3);
-
-// Branch to pick one of the three inputs
-
-    if (i === 0) {          // Checks whether our random index is exactly 0.
-      return a;             // If so, return a hands back the first argument.
-    } else if (i === 1) {   // Handles the case where the index is 1, returning the second argument
-      return b;         
-    } else {                // Covers everything else—in this setup that's only when i is 2—so it returns c.
-      return c;       
+function getComputerChoice() {
+    //use math.random and multiply by 3 to get a random integer that is either 0, 1, or 2
+    let computerChoice = Math.floor(Math.random() * 3);
+    //assign 0 to rock
+    if (computerChoice === 0) {
+        return 'rock';
+    //assign 1 to paper
+    } else if (computerChoice === 1) {
+        return 'paper';
+    //assign 2 to scissors
+    } else if (computerChoice === 2) {
+        return ('scissors')
     }
-  }
-  
-  console.log(getComputerChoice('rock', 'paper', 'scissors'));
-  
-// BASIC EXPLANATION
- // Picks a random number: 0, 1, or 2
- // If it’s 0, give you the first word (a).
- // If it’s 1, give you the second word (b).
- // Otherwise (it must be 2), give you the third word (c).
+}
 
-// DETAILED EXPLAINATION
- // Math.random() - gives you a random decimal between 0 and almost 1 (like 0.73 or 0.05).
- // * 3 - turns that into a number from 0 up to almost 3 (so something like 2.19 or 0.15).
- // Math.floor(...) - rounds down to 0, 1, or 2. That’s our “choice number.”
- // if - checks if choice is 0 → return the first word you passed in (a).
- // if - checks if choice is 1 → return the second word (b).
- // Otherwise (it must be 2) → return the third word (c).
- // So each time you call it, you get back one of your three words at random!
-
- 
-// Delcare a new function
+// Delcare a new function for user choice
 
 function getHumanChoice() {
 // Prompt and capture the result
     let choice = prompt("Choose: Rock, Paper, or Scissors!");
-    if (!choice) return null;              // user hit “Cancel”
-  
-// Validate choice
-    if (choice === "Rock" || choice === "Paper" || choice === "Scissors") {
-      return choice;                       // return the valid choice
-    } 
-  }
-  
-  console.log(getHumanChoice());
+    choice = choice.toLowerCase();
+    return choice;
+}
+
+// Declare functions for incrementing score
+
+function incrementHumanScore() {
+    humanScore++;
+}
+function incrementComputerScore() {
+    computerScore++;
+}
+
+// Declare function to play game
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    
+    // Delcare function to play round
+    function playRound(humanChoice, computerChoice) {
+
+        if (
+          (humanChoice === "rock" && computerChoice === "scissors") ||
+          (humanChoice === "paper" && computerChoice === "rock") ||
+          (humanChoice === "scissors" && computerChoice === "paper")
+        ) {
+          humanScore++;
+          console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        } else if (humanChoice === computerChoice) {
+          console.log(`It's a tie! You both chose ${humanChoice}`);
+        } else {
+          computerScore++;
+          console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+        }
+      }
+    
+    // Use for loop to play 5 rounds
+    for (let i = 1; i <= 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+        console.log(`Score after Round ${i} — You: ${humanScore}, Computer: ${computerScore}`);
+    }
+
+    // Final winner
+    if (humanScore > computerScore) {
+        console.log("You win the game!");
+    } else if (computerScore > humanScore) {
+        console.log("Computer wins the game!");
+    } else {
+        console.log("The game is a tie!");
+    }
+
+}
+
+// Start the game
+playGame();
