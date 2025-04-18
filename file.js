@@ -39,13 +39,14 @@ function getComputerChoice(a, b, c) {
  // So each time you call it, you get back one of your three words at random!
 
  
+// Delcare a new function
 
- function getHumanChoice() {
-    // 1) prompt and capture the result
+function getHumanChoice() {
+// Prompt and capture the result
     let choice = prompt("Choose: Rock, Paper, or Scissors!");
     if (!choice) return null;              // user hit “Cancel”
   
-    // 2) optionally validate it
+// Validate choice
     if (choice === "Rock" || choice === "Paper" || choice === "Scissors") {
       return choice;                       // return the valid choice
     } 
