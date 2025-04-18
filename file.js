@@ -37,3 +37,18 @@ function getComputerChoice(a, b, c) {
  // if - checks if choice is 1 → return the second word (b).
  // Otherwise (it must be 2) → return the third word (c).
  // So each time you call it, you get back one of your three words at random!
+
+ 
+
+ function getHumanChoice() {
+    // 1) prompt and capture the result
+    let choice = prompt("Choose: Rock, Paper, or Scissors!");
+    if (!choice) return null;              // user hit “Cancel”
+  
+    // 2) optionally validate it
+    if (choice === "Rock" || choice === "Paper" || choice === "Scissors") {
+      return choice;                       // return the valid choice
+    } 
+  }
+  
+  console.log(getHumanChoice());
