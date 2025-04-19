@@ -1,6 +1,3 @@
-// Declare a new function
-// Highlight the three parameters—placeholders for the words we’ll pass in
-
 // Get computer to return 'rock' 'paper' or 'scissors'
 
 function getComputerChoice() {
@@ -18,66 +15,63 @@ function getComputerChoice() {
     }
 }
 
-// Delcare a new function for user choice
+// 1) Score state variables
+let humanScore = 0;
+let computerScore = 0;
 
-function getHumanChoice() {
-// Prompt and capture the result
-    let choice = prompt("Choose: Rock, Paper, or Scissors!");
-    choice = choice.toLowerCase();
-    return choice;
-}
+// 2) Grab the buttons
+const rockBtn     = document.getElementById('rock-button');
+const paperBtn    = document.getElementById('paper-button');
+const scissorsBtn = document.getElementById('scissors-button');
 
-// Declare functions for incrementing score
+// 3) Grab the scoreboard spans and results div
+const humanScoreEl    = document.getElementById('human-score');
+const computerScoreEl = document.getElementById('computer-score');
+const resultsDiv      = document.getElementById('results');
 
-function incrementHumanScore() {
-    humanScore++;
-}
-function incrementComputerScore() {
-    computerScore++;
-}
-
-// Declare function to play game
-
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    
-    // Delcare function to play round
-    function playRound(humanChoice, computerChoice) {
-
-        if (
-          (humanChoice === "rock" && computerChoice === "scissors") ||
-          (humanChoice === "paper" && computerChoice === "rock") ||
-          (humanChoice === "scissors" && computerChoice === "paper")
-        ) {
-          humanScore++;
-          console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        } else if (humanChoice === computerChoice) {
-          console.log(`It's a tie! You both chose ${humanChoice}`);
-        } else {
-          computerScore++;
-          console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-        }
-      }
-    
-    // Use for loop to play 5 rounds
-    for (let i = 1; i <= 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        console.log(`Score after Round ${i} — You: ${humanScore}, Computer: ${computerScore}`);
-    }
-
-    // Final winner
-    if (humanScore > computerScore) {
-        console.log("You win the game!");
-    } else if (computerScore > humanScore) {
-        console.log("Computer wins the game!");
+// 4) Core round logic
+function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
+  
+    let message;
+    if (humanChoice === computerChoice) {
+      message = `It's a tie! You both chose ${humanChoice}.`;
+    } else if (
+      (humanChoice === 'rock'     && computerChoice === 'scissors') ||
+      (humanChoice === 'paper'    && computerChoice === 'rock')     ||
+      (humanChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+      humanScore++;
+      message = `You win this round! ${humanChoice} beats ${computerChoice}.`;
     } else {
-        console.log("The game is a tie!");
+      computerScore++;
+      message = `You lose this round! ${computerChoice} beats ${humanChoice}.`;
     }
-
+  
+    // show the round result
+    const p = document.createElement('p');
+    p.textContent = message;
+    resultsDiv.appendChild(p);
+  
+    // update the running scores
+    humanScoreEl.textContent   = humanScore;
+    computerScoreEl.textContent = computerScore;
+  
+    // check for first to 5
+    if (humanScore === 5 || computerScore === 5) {
+      const final = document.createElement('p');
+      final.classList.add('final');
+      final.textContent = humanScore > computerScore
+        ? 'You reached 5 points! You win the game!'
+        : 'Computer reached 5 points. You lose the game.';
+      resultsDiv.appendChild(final);
+  
+      // disable buttons so game stops
+      [rockBtn, paperBtn, scissorsBtn].forEach(btn => btn.disabled = true);
+    }
 }
-
-// Start the game
-playGame();
+  
+// 5) Wire up the buttons
+  rockBtn.addEventListener('click',     () => playRound('rock'));
+  paperBtn.addEventListener('click',    () => playRound('paper'));
+  scissorsBtn.addEventListener('click', () => playRound('scissors'));
